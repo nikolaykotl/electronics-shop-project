@@ -54,10 +54,12 @@ class Item:
 
     @classmethod
     def instantiate_from_csv(cls):
+        #создает путь к файлу \src\items.csv
         path_dir = os.path.dirname(sys.argv[0])
         s = path_dir
         pth_file = s[:s.rindex("\\") + 1]
         path_file = pth_file +'\src\items.csv'
+        #читаем файл
         with open(path_file, 'r', encoding= 'utf8') as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
@@ -69,8 +71,7 @@ class Item:
     @staticmethod
     def string_to_number(s):
         s = str(len(Item.all))
-        a = int(s)
-        return a
+        return int(s)
 
     def __repr__(self):
         return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
