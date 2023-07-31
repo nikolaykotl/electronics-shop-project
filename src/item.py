@@ -1,8 +1,7 @@
 import os
 import csv
 import sys
-from pathlib import Path
-import re
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -73,15 +72,8 @@ class Item:
         a = int(s)
         return a
 
-    #@staticmethod
-    #def string_to_number():
-     #   path_dir = os.path.dirname(sys.argv[0])
-     #   s = path_dir
-     #   pth_file = s[:s.rindex("\\") + 1]
-     #   path_file = pth_file + '\src\items.csv'
-      #  with open(path_file, 'r', encoding='utf8') as csvfile:
-       #     reader = csv.DictReader(csvfile)
-       #     line = 0
-       #     for row in reader:
-       #         line += 1
-       # return line
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        return f'{self.__name}'

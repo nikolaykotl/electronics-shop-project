@@ -6,7 +6,7 @@ from src.item import Item
 
 @pytest.fixture
 def item():
-    return Item('ноутбукrrrrrrr', 50000, 10)
+    return Item('ноутбук', 50000, 10)
 @pytest.fixture
 def item1():
     return Item('Суперсмартфон', 20000, 5)
@@ -32,7 +32,7 @@ def test_item_name(item):
             item.name = item.name
         else:
             item.name = item.name[0:10]
-        #assert item1.name == 'Суперсмарт'
+
         assert item.name == 'ноутбук'
 
 
@@ -43,9 +43,13 @@ def test_item_name(item1):
         item1.name = item1.name[0:10]
     assert item1.name == 'Суперсмарт'
 
-#def test_item_instantiate_from_csv():
+
 def test_item_string_to_number():
     assert Item.string_to_number('0') == 0
-    #assert Item.string_to_number('5.0') == 5
-    #assert Item.string_to_number('5.5') == 5
 
+
+def __repr__():
+    assert repr(item) == "Item('ноутбук', 50000, 10)"
+
+def __str__():
+    assert str(item) == 'ноутбук'
