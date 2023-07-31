@@ -1,9 +1,16 @@
+import os
+import csv
+import sys
+from pathlib import Path
+import re
 class Item:
     """
     Класс для представления товара в магазине.
     """
     pay_rate = 1.0
     all = []
+
+
 
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
@@ -13,7 +20,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
-        self.name = name
+        self.__name = name
         self.price = price
         self.quantity = quantity
 
@@ -31,3 +38,50 @@ class Item:
         """
         self.price = self.pay_rate * self.price
         return self.price
+
+    # Геттер для name
+    @property
+    def name(self):
+        return self.__name
+
+    #Сеттер для name
+    @name.setter
+    def name(self, value: str):
+        if len(value) <= 10:
+            self.__name = value
+        else:
+            self.__name = value[0:10]
+
+
+    @classmethod
+    def instantiate_from_csv(cls):
+        path_dir = os.path.dirname(sys.argv[0])
+        s = path_dir
+        pth_file = s[:s.rindex("\\") + 1]
+        path_file = pth_file +'\src\items.csv'
+        with open(path_file, 'r', encoding= 'utf8') as csvfile:
+            reader = csv.DictReader(csvfile)
+            for row in reader:
+                name, price, quantity = row['name'], row['price'], row['quantity']
+                item = cls(name, price, quantity)
+                Item.all.append(item)
+            return cls(name, price, quantity)
+
+    @staticmethod
+    def string_to_number(s):
+        s = str(len(Item.all))
+        a = int(s)
+        return a
+
+    #@staticmethod
+    #def string_to_number():
+     #   path_dir = os.path.dirname(sys.argv[0])
+     #   s = path_dir
+     #   pth_file = s[:s.rindex("\\") + 1]
+     #   path_file = pth_file + '\src\items.csv'
+      #  with open(path_file, 'r', encoding='utf8') as csvfile:
+       #     reader = csv.DictReader(csvfile)
+       #     line = 0
+       #     for row in reader:
+       #         line += 1
+       # return line
