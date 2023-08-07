@@ -66,7 +66,6 @@ class Item:
                 name, price, quantity = row['name'], row['price'], row['quantity']
                 item = cls(name, price, quantity)
                 Item.all.append(item)
-            return cls(name, price, quantity)
 
     @staticmethod
     def string_to_number(s):
